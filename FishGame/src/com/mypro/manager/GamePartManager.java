@@ -13,35 +13,35 @@ import com.mypro.model.componets.BottomTime;
 import com.mypro.tools.LogTools;
 
 /**
- * ÓÎÏ·¹Ø¿¨¹ÜÀíÆ÷
+ * ï¿½ï¿½Ï·ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author Leslie Leung
  *
  */
 public class GamePartManager {
 	/**
-	 * µ¥ÀýÄ£Ê½Ê¹ÓÃ
+	 * ï¿½ï¿½ï¿½ï¿½Ä£Ê½Ê¹ï¿½ï¿½
 	 */
 	private	static GamePartManager manager;
 	/**
-	 * ¹ÜÀíµÄËùÓÐ¹Ø¿¨
-	 * key		Îª¹Ø¿¨Ãû
-	 * value	Îª¹Ø¿¨ÃèÊö
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹Ø¿ï¿½
+	 * key		Îªï¿½Ø¿ï¿½ï¿½ï¿½
+	 * value	Îªï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private ArrayList<GamePartInfo> games = new ArrayList<GamePartInfo>();
 	/**
-	 * µ±Ç°½øÐÐµÄ¹Ø¿¨
+	 * ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ÐµÄ¹Ø¿ï¿½
 	 */
 	private GamePartInfo part;
 	/**
-	 * µ±Ç°½øÐÐµÄ¹Ø¿¨µÄ±³¾°Í¼Æ¬
+	 * ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ÐµÄ¹Ø¿ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Í¼Æ¬
 	 */
 	private BackGround background;
 	/**
-	 * ÊÇ·ñ×¼±¸Íê±Ï
+	 * ï¿½Ç·ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private boolean prepared;
 	/**
-	 * ¹¹ÔìÆ÷
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private GamePartManager(){
 		try {
@@ -50,40 +50,47 @@ public class GamePartManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if (games.size() == 0) {
+			initDefaultGamePart();
+		}
 	}
 	
 	
 	/**
-	 * ×¼±¸
+	 * ×¼ï¿½ï¿½
 	 */
 	public void prepare(){
+		if (this.part == null) {
+			Log.e("GamePartManager", "part is null, call initDefaultGamePart");
+			initDefaultGamePart();
+		}
 		try{
-			//ÉèÖÃ±³¾°
 			setBg();
-			//¸üÐÂÓã¹ÜÀí
-			FishManager.getFishMananger().updateFish(this.part.getFishName());
+			FishManager fishManager = FishManager.getFishMananger();
+			if (fishManager != null && this.part.getFishName() != null) {
+				fishManager.updateFish(this.part.getFishName());
+			}
 			prepared = true;
 		}catch(Exception e){
 			LogTools.doLogForException(e);
 		}
-		
 	}
 	/**
-	 * Æô¶¯¹Ø¿¨¹ÜÀíÆ÷
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void start(){
 		if(!prepared){
-			Log.e("GamePartManager", "¹ÜÀíÆ÷Ã»ÓÐ×¼±¸£¬ÊÇ·ñµ÷ÓÃ¹ýprepare·½·¨£¿");
+			Log.e("GamePartManager", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ã¹ï¿½prepareï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			return;
 		}
 
-		//ÉèÖÃÓãÈº¹ÜÀíÆ÷£¬Í¨Öª¿ÉÉú³ÉµÄÓãÈºÖÖÀà
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½ï¿½
 		GamingInfo.getGamingInfo().getShoalManager().start(this.part);	
-		//Æô¶¯¸ø½ð±ÒÏß³Ì
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½
 		startGiveGoldThrad();
 	}
 	/**
-	 * Æô¶¯¶¨Ê±¸ø½ð±ÒÏß³Ì
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½
 	 */
 	private void startGiveGoldThrad(){
 		new Thread(new Runnable() {			
@@ -117,49 +124,67 @@ public class GamePartManager {
 		}).start();
 	}
 	/**
-	 * ÉèÖÃ±³¾°
+	 * ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½
 	 */
 	private void setBg(){
+		if (this.part == null || this.part.getBackground() == null) {
+			return;
+		}
+		ImageManager imgManager = ImageManager.getImageMnagaer();
+		if (imgManager == null) {
+			return;
+		}
+		GamingInfo gamingInfo = GamingInfo.getGamingInfo();
+		if (gamingInfo == null) {
+			return;
+		}
+		Bitmap bgBitmap = imgManager.getBitmapByAssets(this.part.getBackground());
+		if (bgBitmap == null) {
+			return;
+		}
 		try {
 			if(background==null){
 				background = new BackGround();
-				try {
-					background.setCurrentPic(ImageManager.getImageMnagaer().sacleImageByWidthAndHeight(ImageManager.getImageMnagaer().getBitmapByAssets(this.part.getBackground()), GamingInfo.getGamingInfo().getScreenWidth(), GamingInfo.getGamingInfo().getScreenHeight()));				
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					LogTools.doLogForException(e);
+				Bitmap scaledBitmap = imgManager.sacleImageByWidthAndHeight(bgBitmap, gamingInfo.getScreenWidth(), gamingInfo.getScreenHeight());
+				if (scaledBitmap != null) {
+					background.setCurrentPic(scaledBitmap);
 				}
-				GamingInfo.getGamingInfo().getSurface().putDrawablePic(Constant.BACK_GROUND_LAYER, background);
+				if (gamingInfo.getSurface() != null) {
+					gamingInfo.getSurface().putDrawablePic(Constant.BACK_GROUND_LAYER, background);
+				}
 			}else{
-				try {
-					background.setCurrentPic(Bitmap.createScaledBitmap(ImageManager.getImageMnagaer().getBitmapByAssets(this.part.getBackground()), GamingInfo.getGamingInfo().getScreenWidth(), GamingInfo.getGamingInfo().getScreenHeight(), false));				
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					LogTools.doLogForException(e);
+				Bitmap scaledBitmap = Bitmap.createScaledBitmap(bgBitmap, gamingInfo.getScreenWidth(), gamingInfo.getScreenHeight(), false);
+				if (scaledBitmap != null) {
+					background.setCurrentPic(scaledBitmap);
 				}
 			}
 		} catch (Exception e) {
 			LogTools.doLogForException(e);
 		}
-		
 	}
 	
 	/**
-	 * ³õÊ¼»¯ËùÓÐµÄ¹Ø¿¨
-	 * @param xml	ÐèÒª½âÎöµÄxmlÎÄ¼þ
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ¹Ø¿ï¿½
+	 * @param xml	ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xmlï¿½Ä¼ï¿½
 	 */
 	private void initGamePart(XmlPullParser xml){
-		//Ñ­»·ËùÓÐµÄ¹Ø¿¨
-		while(GamingInfo.getGamingInfo().isGaming()&&XmlManager.gotoTagByTagName(xml, "key")){
-			//´´½¨¹Ø¿¨ÃèÊöÀà
+		if (xml == null) {
+			return;
+		}
+		GamingInfo gamingInfo = GamingInfo.getGamingInfo();
+		if (gamingInfo == null) {
+			return;
+		}
+		while(gamingInfo.isGaming() && XmlManager.gotoTagByTagName(xml, "key")){
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			GamePartInfo gamePartInfo = new GamePartInfo();
-			//»ñÈ¡¹Ø¿¨Ãû³Æ
+			//ï¿½ï¿½È¡ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "string");
 			gamePartInfo.setPartName(XmlManager.getValueByCurrentTag(xml));		
-			//»ñÈ¡¹Ø¿¨³öÏÖµÄÓã
+			//ï¿½ï¿½È¡ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "string");
 			gamePartInfo.setFishName(XmlManager.getValueByCurrentTag(xml).split(";"));
-			//ÓãµÄ³öÏÖ¸ÅÂÊ
+			//ï¿½ï¿½Ä³ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "string");
 			String probability[] = XmlManager.getValueByCurrentTag(xml).split(";");
 			int[] showProbability = new int[probability.length];
@@ -167,41 +192,61 @@ public class GamePartManager {
 				showProbability[i] = Integer.parseInt(probability[i]);
 			}
 			gamePartInfo.setShowProbability(showProbability);
-			//»ñÈ¡¿É³öÏÖµÄÓãÈº×ÜÊý
+			//ï¿½ï¿½È¡ï¿½É³ï¿½ï¿½Öµï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "integer");
 			gamePartInfo.setShoalSumInScreen(Integer.parseInt(XmlManager.getValueByCurrentTag(xml)));
-			//»ñÈ¡¹Ø¿¨Ê±¼ä
+			//ï¿½ï¿½È¡ï¿½Ø¿ï¿½Ê±ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "integer");
 			gamePartInfo.setPartTime(Integer.parseInt(XmlManager.getValueByCurrentTag(xml)));
-			//»ñÈ¡ÏÂÒ»¹ØµÄÃû³Æ
+			//ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "string");
 			gamePartInfo.setNextPart(XmlManager.getValueByCurrentTag(xml));
-			//»ñÈ¡±³¾°ÒôÀÖ
+			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			XmlManager.gotoTagByTagName(xml, "string");
 			gamePartInfo.setBgMusic(XmlManager.getValueByCurrentTag(xml));
-			//»ñÈ¡±³¾°Í¼Æ¬
+			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 			XmlManager.gotoTagByTagName(xml, "string");
 			gamePartInfo.setBackground(XmlManager.getValueByCurrentTag(xml));
 			this.games.add(gamePartInfo);
 		}
-		//Èç¹ûÓÐ¹Ø¿¨£¬Ä¬ÈÏµÚÒ»¸öÔªËØÎª¿ªÊ¼¹Ø¿¨£¬Õâ¸ö¼¯ºÏ²»Ó¦¸ÃÎª¿Õ¼¯ºÏ
 		if(this.games.size()>0){
 			this.part = this.games.get(0);
 		}
-		
 	}
+	
+	private void initDefaultGamePart() {
+		Log.e("GamePartManager", "initDefaultGamePart called");
+		GamePartInfo defaultPart = new GamePartInfo();
+		defaultPart.setPartName("default");
+		defaultPart.setFishName(new String[]{"fish01"});
+		defaultPart.setShowProbability(new int[]{100});
+		defaultPart.setShoalSumInScreen(10);
+		defaultPart.setPartTime(60);
+		defaultPart.setNextPart("default");
+		defaultPart.setBgMusic("bgm");
+		defaultPart.setBackground("background.png");
+		this.games.add(defaultPart);
+		this.part = defaultPart;
+	}
+	
+	public GamePartInfo getCurrentPart() {
+		return this.part;
 	/**
-	 * »ñÈ¡¹Ø¿¨¹ÜÀíÆ÷ÊµÀý
+	 * ï¿½ï¿½È¡ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
 	 * @return
 	 */
 	public static GamePartManager getManager(){
 		if(manager==null){
-			manager = new GamePartManager();
+			synchronized(GamePartManager.class) {
+				if(manager==null){
+					manager = new GamePartManager();
+				}
+			}
 		}
 		return manager;
 	}
 	/**
-	 * ×¢Ïú·½·¨
+	 * ×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void destroy(){
 		manager = null;
