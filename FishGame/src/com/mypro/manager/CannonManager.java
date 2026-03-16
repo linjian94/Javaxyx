@@ -16,39 +16,39 @@ import com.mypro.tools.LogTools;
 import com.mypro.tools.Tool;
 
 /**
- * ´óÅÚ¹ÜÀíÆ÷
+ * ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author Leslie Leung
  *
  */
 public class CannonManager {
 	/**
-	 * ÊÇ·ñ¿ÉÒÔ¸ü»»´óÅÚ
+	 * ï¿½Ç·ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private boolean canChangeCannon = true;
 	/**
-	 * ËùÓÐ×Óµ¯
-	 * key:´óÅÚÖÊÁ¿ID£¬value:×Óµ¯Í¼Æ¬Êý×é
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
+	 * key:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½value:ï¿½Óµï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 	 */
 	private HashMap<Integer,Bitmap[]> bullet = new HashMap<Integer,Bitmap[]>();
 	/**
-	 * ËùÓÐ´óÅÚ
-	 * key:´óÅÚÖÊÁ¿ID£¬value:´óÅÚÍ¼Æ¬Êý×é
+	 * ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
+	 * key:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½value:ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 	 */
 	private HashMap<Integer,Cannon> cannon = new HashMap<Integer,Cannon>();
 	/**
-	 * ËùÓÐÓæÍøÍ¼Æ¬
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 	 */
 	private Bitmap[] net;
 	/**
-	 * ±ä»»´óÅÚµÄÐ§¹ûÍ¼
+	 * ï¿½ä»»ï¿½ï¿½ï¿½Úµï¿½Ð§ï¿½ï¿½Í¼
 	 */
 	private Bitmap[] changeCannonEffect;
 	/**
-	 * ÊÇ·ñ¿ÉÒÔ·¢ÉäÅÚµ¯
+	 * ï¿½Ç·ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Úµï¿½
 	 */
 	private boolean shotable;
 	/**
-	 * µ±Ç°Ê¹ÓÃµÄ´óÅÚID
+	 * ï¿½ï¿½Ç°Ê¹ï¿½ÃµÄ´ï¿½ï¿½ï¿½ID
 	 */
 	private int currentCannonIndex = 1;
 	private static CannonManager cannonManager;
@@ -58,19 +58,19 @@ public class CannonManager {
 
 	}
 	/**
-	 * ³õÊ¼»¯´óÅÚ¹ÜÀíÆ÷
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void init(){
 		try {
-			//»ñÈ¡ÅäÖÃÎÄ¼þÖ¸¶¨µÄËùÓÐÍ¼Æ¬
+			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 			HashMap<String,Bitmap> allImage = ImageManager.getImageMnagaer().getImagesMapByImageConfig(ImageManager.getImageMnagaer().createImageConfigByPlist("cannon/bulletandnet"),ImageManager.getImageMnagaer().scaleNum);
 			allImage.putAll(ImageManager.getImageMnagaer().getImagesMapByImageConfig(ImageManager.getImageMnagaer().createImageConfigByPlist("cannon/fire"),ImageManager.getImageMnagaer().scaleNum));
 
-			//³õÊ¼»¯×Óµ¯
+			//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Óµï¿½
 			initAmmo(allImage);
-			//³õÊ¼»¯ÓæÍø
+			//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			initNet(allImage);
-			//³õÊ¼»¯´óÅÚ
+			//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			initCannon(allImage);
 			
 		} catch (Exception e) {
@@ -78,17 +78,17 @@ public class CannonManager {
 		}
 	}
 	/**
-	 * ³õÊ¼»¯ËùÓÐ´óÅÚÍ¼Æ¬
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Í¼Æ¬
 	 * @param allImage
 	 */
 	private void initCannon(HashMap<String,Bitmap> allImage){
-		//´óÅÚµÄÍ¼È«Ãû(fire_11.png)
+		//ï¿½ï¿½ï¿½Úµï¿½Í¼È«ï¿½ï¿½(fire_11.png)
 		StringBuffer cannonFullName = new StringBuffer();
-		//¶¨ÒåÃû×Ö±àºÅ,×ÓÃû³Æ±àºÅ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
 		int cannonNum = 1,subCannonNum = 1;
 		String cannonName = "fire";
 		ArrayList<Bitmap> allCannonList = new ArrayList<Bitmap>();
-		//»ñÈ¡µ±Ç°×Óµ¯µÄËùÓÐ¶¯×÷
+		//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
 		while(GamingInfo.getGamingInfo().isGaming()){
 			allCannonList.clear();
 			subCannonNum = 1;
@@ -102,16 +102,16 @@ public class CannonManager {
 				allCannonList.add(cannon);
 				subCannonNum++;
 			}
-			//Èç¹ûÃ»ÓÐ½âÎöµ½ÄÚÈÝÁË
+			//ï¿½ï¿½ï¿½Ã»ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(allCannonList.size()==0){
 				break;
 			}
-			//½«¼¯ºÏ×ª»»ÎªÊý×é
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 			Bitmap[] cannons = new Bitmap[allCannonList.size()];
 			for(int i =0;i<allCannonList.size();i++){
 				cannons[i] = allCannonList.get(i);
 			}
-			//½«´óÅÚ·ÅÈë¹ÜÀíÆ÷ÖÐ
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Cannon cannon_obj = new Cannon(cannons);
 			cannon_obj.init();
 			cannon.put(cannonNum,cannon_obj);
@@ -119,69 +119,74 @@ public class CannonManager {
 		}
 	}
 	/**
-	 * ³õÊ¼»¯´óÅÚ
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void initCannon(){
 		setShotable(false);
 		currentCannonIndex = 1;
-		resetCannonMatrix(getCannon(currentCannonIndex));
-		LayoutManager.getLayoutManager().initCannon(getCannon(currentCannonIndex));
+		Cannon cannon = getCannon(currentCannonIndex);
+		if (cannon == null) {
+			Log.e("CannonManager", "ï¿½ï¿½È¡ï¿½ï¿½ï¿½Úµï¿½Ê§ï¿½Ü£ï¿½cannonÎªnull");
+			return;
+		}
+		resetCannonMatrix(cannon);
+		LayoutManager.getLayoutManager().initCannon(cannon);
 		setShotable(true);
 	}
 	/**
-	 * ³õÊ¼»¯ÓæÍø
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void initNet(HashMap<String,Bitmap> allImage){
-		//ÓæÍøµÄÍ¼È«Ãû(net011.png)
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼È«ï¿½ï¿½(net011.png)
 		StringBuffer netFullName = new StringBuffer();
-		//¶¨ÒåÃû×Ö±àºÅ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½
 		int netNum = 1;
 		String netName = "net";
 		ArrayList<Bitmap> allNetList = new ArrayList<Bitmap>();
-		//»ñÈ¡µ±Ç°×Óµ¯µÄËùÓÐ¶¯×÷
+		//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
 		while(GamingInfo.getGamingInfo().isGaming()){
 			netFullName.delete(0, netFullName.length());
 			netFullName.append(netName+"0"+netNum+".png");
 			Bitmap net = allImage.get(netFullName.toString());
-			//Èç¹ûÃ»ÓÐ½âÎöµ½ÄÚÈÝÁË
+			//ï¿½ï¿½ï¿½Ã»ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(net==null){
 				break;
 			}
 			allNetList.add(net);
 			netNum++;
 		}
-		//½«¼¯ºÏ×ª»»ÎªÊý×é
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 		net = new Bitmap[allNetList.size()];
 		for(int i =0;i<allNetList.size();i++){
 			net[i] = allNetList.get(i);
 		}
 	}
 	/**
-	 * ³õÊ¼»¯ËùÓÐ×Óµ¯Í¼Æ¬
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Í¼Æ¬
 	 */
 	private void initAmmo(HashMap<String,Bitmap> allImage){
-		//×Óµ¯µÄÍ¼È«Ãû(bullet12.png),×Óµ¯×ÓÃû(bullet12_01.png)
+		//ï¿½Óµï¿½ï¿½ï¿½Í¼È«ï¿½ï¿½(bullet12.png),ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½(bullet12_01.png)
 		StringBuffer ammoFullName = new StringBuffer();
 		StringBuffer subAmmoFullName = new StringBuffer();
-		//¶¨ÒåÃû×Ö±àºÅ,×ÓÃû³Æ±àºÅ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
 		int ammoNum = 1,subAmmoNum = 1;
 		String ammoName = "bullet";
 		ArrayList<Bitmap> allAmmoList = new ArrayList<Bitmap>();
-		//»ñÈ¡µ±Ç°×Óµ¯µÄËùÓÐ¶¯×÷
+		//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
 		while(GamingInfo.getGamingInfo().isGaming()){
 			allAmmoList.clear();
 			ammoFullName.delete(0, ammoFullName.length());
 			ammoFullName.append(ammoName+"0"+ammoNum+".png");
-			//¶¨ÒåÒ»¸öÓÃÓÚ´´½¨Í¼Æ¬µÄÒýÓÃ
+			//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Bitmap ammo = allImage.get(ammoFullName.toString());
-			//Èç¹ûÍ¼Æ¬Ã»ÓÐÕÒµ½£¬ÍË³öÑ­»·
+			//ï¿½ï¿½ï¿½Í¼Æ¬Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½Ë³ï¿½Ñ­ï¿½ï¿½
 			if(ammo==null){
 				break;
 			}
 			allAmmoList.add(ammo);
 			subAmmoNum = 1;
-			//ÊÔÍ¼³¢ÊÔ¿´¿´ÓÐÃ»ÓÐÍ¬ÃûµÄ×ÓÍ¼Æ¬
-			//ÕâÀï-4ÊÇÈ¥µô.pngÕâ¸ö¼¸¸ö×Ö·û£¬ÔÙ¼ÌÐøÆ´Ð´×ÓÃû³Æ
+			//ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
+			//ï¿½ï¿½ï¿½ï¿½-4ï¿½ï¿½È¥ï¿½ï¿½.pngï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ù¼ï¿½ï¿½ï¿½Æ´Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			ammoFullName.delete(ammoFullName.length()-4, ammoFullName.length());
 			while(GamingInfo.getGamingInfo().isGaming()){
 				subAmmoFullName.delete(0, subAmmoFullName.length());				
@@ -193,12 +198,12 @@ public class CannonManager {
 				allAmmoList.add(subAmmo);
 				subAmmoNum++;
 			}
-			//½«¼¯ºÏ×ª»»ÎªÊý×é
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 			Bitmap[] bullets = new Bitmap[allAmmoList.size()];
 			for(int i =0;i<allAmmoList.size();i++){
 				bullets[i] = allAmmoList.get(i);
 			}
-			//½«×Óµ¯·ÅÈë¹ÜÀíÆ÷ÖÐ
+			//ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			bullet.put(ammoNum, bullets);
 			ammoNum++;
 		}
@@ -211,7 +216,7 @@ public class CannonManager {
 		return cannonManager;
 	}
 	/**
-	 * ¸ù¾Ý¸ø¶¨´óÅÚID»ñÈ¡·¢ÉäµÄ¶ÔÓ¦×Óµ¯µÄÊµÀý
+	 * ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½Ó¦ï¿½Óµï¿½ï¿½ï¿½Êµï¿½ï¿½
 	 * @param id
 	 * @return
 	 */
@@ -221,7 +226,7 @@ public class CannonManager {
 		return ammo;
 	}
 	/**
-	 * ¸ù¾Ý¸ø¶¨´óÅÚID»ñÈ¡´óÅÚµÄÊµÀý
+	 * ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½È¡ï¿½ï¿½ï¿½Úµï¿½Êµï¿½ï¿½
 	 * @param id
 	 * @return
 	 */
@@ -230,13 +235,13 @@ public class CannonManager {
 		
 	}
 	/**
-	 * Ìá¸ß´óÅÚµÈ¼¶
+	 * ï¿½ï¿½ß´ï¿½ï¿½ÚµÈ¼ï¿½
 	 */
 	public void upCannon(){
 		if(!canChangeCannon){
 			return;
 		}
-		canChangeCannon = false;//²»Ðí¸ü»»´óÅÚ
+		canChangeCannon = false;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		setShotable(false);
 		if(currentCannonIndex+1>cannon.size()){
 			currentCannonIndex = 1;
@@ -245,20 +250,20 @@ public class CannonManager {
 		}
 		resetCannonMatrix(getCannon(currentCannonIndex));
 //		playChangeCannonEffect();
-		//²¥·Å¸ü»»´óÅÚµÄÒôÐ§
+		//ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ð§
 //		SoundManager.playSound(SoundManager.SOUND_BGM_CHANGE_CANNON);
 		LayoutManager.getLayoutManager().updateCannon(getCannon(currentCannonIndex));	
 		canChangeCannon = true;
 		setShotable(true);
 	}
 	/**
-	 * ½µµÍ´óÅÚµÈ¼¶
+	 * ï¿½ï¿½ï¿½Í´ï¿½ï¿½ÚµÈ¼ï¿½
 	 */
 	public void downCannon(){
 		if(!canChangeCannon){
 			return;
 		}
-		canChangeCannon = false;//²»Ðí¸ü»»´óÅÚ
+		canChangeCannon = false;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		setShotable(false);
 		if(currentCannonIndex-1==0){
 			currentCannonIndex = cannon.size();
@@ -273,9 +278,9 @@ public class CannonManager {
 	}
 
 	/**
-	 * Éä»÷×Óµ¯
-	 * @param targetX		Ä¿±êµãX×ø±ê
-	 * @param targetY		Ä¿±êµãy×ø±ê
+	 * ï¿½ï¿½ï¿½ï¿½Óµï¿½
+	 * @param targetX		Ä¿ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
+	 * @param targetY		Ä¿ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
 	 */
 	public void shot(float targetX,float targetY){
 		if(shotable){
@@ -285,9 +290,9 @@ public class CannonManager {
 				GamingInfo.getGamingInfo().setScore(GamingInfo.getGamingInfo().getScore()-currentCannonIndex);
 
 				this.rotateCannon(targetX,targetY,getCannon(currentCannonIndex));
-				//²¥·Å´óÅÚ·¢ÉäÐ§¹û
+				//ï¿½ï¿½ï¿½Å´ï¿½ï¿½Ú·ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
 				getCannon(currentCannonIndex).shot();
-				//·¢ÉäÅÚµ¯
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
 				Ammo ammo = getAmmo(currentCannonIndex);
 				ShotThread st = new ShotThread(targetX-ammo.getPicWidth()/2,targetY-ammo.getPicHeight()/2,ammo,GamingInfo.getGamingInfo().getCannonLayoutX()-ammo.getPicWidth()/2,GamingInfo.getGamingInfo().getCannonLayoutY()-ammo.getPicHeight()/2);
 				st.start();
@@ -298,7 +303,7 @@ public class CannonManager {
 		}
 	}
 	/**
-	 * ÉÏµ¯Ê±¼ä
+	 * ï¿½Ïµï¿½Ê±ï¿½ï¿½
 	 */
 	private void waitReload(){
 		new Thread(new Runnable() {		
@@ -318,15 +323,23 @@ public class CannonManager {
 		
 	}
 	/**
-	 * Ðý×ª´óÅÚ
+	 * ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
 	 */
 	private void rotateCannon(float targetX,float targetY,Cannon cannon){
 		try{
-			//»ñÈ¡´óÅÚÐèÒªÐý×ªµÄ½Ç¶È
+			if (cannon == null) {
+				Log.e("CannonManager", "rotateCannonÊ§ï¿½Ü£ï¿½cannonÎªnull");
+				return;
+			}
+			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½×ªï¿½Ä½Ç¶ï¿½
 			float gun_angle = Tool.getAngle(targetX, targetY,GamingInfo.getGamingInfo().getScreenWidth()/2,GamingInfo.getGamingInfo().getScreenHeight());
+			if (cannon.getPicMatrix() == null) {
+				Log.e("CannonManager", "rotateCannonÊ§ï¿½Ü£ï¿½cannon.getPicMatrix()Îªnull");
+				return;
+			}
 			cannon.getPicMatrix().reset();
 			cannon.getPicMatrix().setTranslate(cannon.getX(), cannon.getY());
-			//´óÅÚÐý×ªµÄËã·¨
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ã·¨
 			if(gun_angle>=90){
 				cannon.getPicMatrix().preRotate(90-gun_angle,cannon.getGun_rotate_point_x(),cannon.getGun_rotate_point_y());
 			}else{
@@ -337,14 +350,18 @@ public class CannonManager {
 		}
 	}
 	/**
-	 * »Ö¸´´óÅÚµÄ³õÊ¼×´Ì¬
+	 * ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ÚµÄ³ï¿½Ê¼×´Ì¬
 	 */
 	private void resetCannonMatrix(Cannon cannon){
+		if (cannon == null) {
+			Log.e("CannonManager", "resetCannonMatrixÊ§ï¿½Ü£ï¿½cannonÎªnull");
+			return;
+		}
 		rotateCannon(GamingInfo.getGamingInfo().getScreenWidth()/2,0,cannon);
 	}
 	/**
-	 * ÉèÖÃÊÇ·ñÔÊÐí·¢Éä´óÅÚ
-	 * @param shotable	true:ÔÊÐí false:²»ÔÊÐí
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param shotable	true:ï¿½ï¿½ï¿½ï¿½ false:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void setShotable(boolean shotable){
 		this.shotable = shotable;

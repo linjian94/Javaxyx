@@ -19,27 +19,27 @@ import com.mypro.model.interfaces.Drawable;
 
 public class MainSurface extends JPanel{
 	/**
-	 * ÐÞ¸ÄÍ¼²ãµÄ²Ù×÷¶¨Òå
+	 * ï¿½Þ¸ï¿½Í¼ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
-	//¸üÐÂÍ¼²ã
+	//ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 	private final static int CHANGE_MODE_UPDATE = 0;
-	//Ìí¼ÓÔªËØµ½Í¼²ã
+	//ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Í¼ï¿½ï¿½
 	private final static int CHANGE_MODE_ADD = 1;
-	//É¾³ýÔªËØ´ÓÍ¼²ã
+	//É¾ï¿½ï¿½Ôªï¿½Ø´ï¿½Í¼ï¿½ï¿½
 	private final static int CHANGE_MODE_REMOVE = 2;
-	// Í¼Æ¬µÄÍ¼²ã·Ö²¼
+	// Í¼Æ¬ï¿½ï¿½Í¼ï¿½ï¿½Ö²ï¿½
 	private HashMap<Integer, ArrayList<Drawable>> picLayer =new HashMap<Integer, ArrayList<Drawable>>();
-	// ÐÞ¸ÄºóµÄÍ¼Æ¬µÄÍ¼²ã·Ö²¼,ÕâÀï¸ù¾Ý²Ù×÷·ÖÎªÁËÁ½¸öÍ¼²ã£¬·Ö±ðÊÇÌí¼ÓµÄÔªËØ£¬ºÍÉ¾³ýµÄÔªËØ
+	// ï¿½Þ¸Äºï¿½ï¿½Í¼Æ¬ï¿½ï¿½Í¼ï¿½ï¿½Ö²ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ã£¬ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	private HashMap<Integer, ArrayList<Drawable>> addPicLayer = new HashMap<Integer, ArrayList<Drawable>>(),removePicLayer = new HashMap<Integer, ArrayList<Drawable>>();
-	// ÊÇ·ñÐÞ¸Ä¹ýÍ¼²ã
+	// ï¿½Ç·ï¿½ï¿½Þ¸Ä¹ï¿½Í¼ï¿½ï¿½
 	private boolean changeLayer = false;
-	private int picLayerId[] = new int[0]; // ¶¨ÒåÒ»¸öÍ¼²ãID£¬¼ÓËÙ»ñÈ¡Í¼²ã»æÖÆ£¨Ê¡È¥ÁË´ÓmapÖÐ»ñÈ¡¸÷¸öÍ¼²ãÅÅÐòÎÊÌâ£©
-	private Paint paint; // »­±Ê
-	private OnDrawThread odt; // ÆÁÄ»»æÖÆÏß³Ì£¬ÓÃÓÚ¿ØÖÆ»æÖÆÖ¡Êý£¬ÖÜÆÚÐÔµ÷ÓÃonDraw·½·¨
+	private int picLayerId[] = new int[0]; // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½Ù»ï¿½È¡Í¼ï¿½ï¿½ï¿½ï¿½Æ£ï¿½Ê¡È¥ï¿½Ë´ï¿½mapï¿½Ð»ï¿½È¡ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£©
+	private Paint paint; // ï¿½ï¿½ï¿½ï¿½
+	private OnDrawThread odt; // ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì£ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Æ»ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½onDrawï¿½ï¿½ï¿½ï¿½
 	public MainSurface() {
 		setSize(GamingInfo.getGamingInfo().getScreenWidth(), GamingInfo.getGamingInfo().getScreenHeight());
 		paint = canvas.getPaint();
-		paint.setAntiAlias(true);//ÉèÖÃ¿¹¾â³Ý
+		paint.setAntiAlias(true);//ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½
 		paint.setDither(true);
 		odt = new OnDrawThread(this);
 		
@@ -48,13 +48,13 @@ public class MainSurface extends JPanel{
 		odt.start();
 	}
 	/**
-	 * »æÍ¼·½·¨£¬Õâ¸ö·½·¨ÊÇÓÉÏß³Ì¿ØÖÆ£¬ÖÜÆÚÐÔµ÷ÓÃµÄ
+	 * ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì¿ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½Ãµï¿½
 	 */
 	public void onDraw(Canvas canvas) {
-		//¸üÐÂÍ¼²ãÄÚÈÝ
+		//ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		updatePicLayer(CHANGE_MODE_UPDATE,0,null);
 		
-		// ±éÀúËùÓÐÍ¼²ã£¬°´Í¼²ãÏÈºóË³Ðò»æÖÆ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ã£¬ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Èºï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½
 		for (int id : picLayerId) {
 				for (Drawable drawable : picLayer.get(id)) {
 					drawable.onDraw(canvas, paint);
@@ -62,22 +62,22 @@ public class MainSurface extends JPanel{
 		}
 	}
 	/**
-	 * ¸üÐÂÍ¼²ã£¬ÕâÀï·ÖÎªÈýÖÖ²Ù×÷£¬·Ö±ðÊÇ¸üÐÂÁÙÊ±Í¼²ãÖÐµÄÄÚÈÝµ½»æÖÆÍ¼²ãÖÐ£¬É¾³ý»æÖÆÍ¼²ãÖÐµÄÔªËØ£¬Ìí¼Ó»æÖÆÍ¼²ãÖÐµÄÔªËØ
-	 * ÕâÀï¼ÓÁË¸öÏß³ÌËø£¬±£Ö¤¶àÏß³ÌÏÂ²Ù×÷Í¼²ãµÄ°²È«ÐÔ
-	 * @param mode	¶Ô»æÖÆÍ¼²ãµÄ²Ù×÷ÀàÐÍ£¬¶ÔÓ¦µ±Ç°ÀàµÄCHANGE_MODE³£Á¿
-	 * @param layerId	²Ù×÷µÄÍ¼²ãID
-	 * @param draw		²Ù×÷µÄÍ¼²ãÔªËØ
+	 * ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Í¼ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ð£ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ðµï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ðµï¿½Ôªï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ß³ï¿½ï¿½Â²ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ä°ï¿½È«ï¿½ï¿½
+	 * @param mode	ï¿½Ô»ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ç°ï¿½ï¿½ï¿½CHANGE_MODEï¿½ï¿½ï¿½ï¿½
+	 * @param layerId	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ID
+	 * @param draw		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ôªï¿½ï¿½
 	 */
 	private synchronized void updatePicLayer(int mode,int layerId,Drawable draw){
 		switch(mode){
-		//½«ÁÙÊ±Í¼²ãÖÐµÄÄÚÈÝ¸üÐÂÖÁ»æÖÆÍ¼²ãÖÐ
+		//ï¿½ï¿½ï¿½ï¿½Ê±Í¼ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 		case CHANGE_MODE_UPDATE:
-			//Èç¹ûÓÐÐÞ¸Ä
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 			if(changeLayer){
-				//ÏòÍ¼²ãÌí¼ÓÐÂµÄÔªËØ
+				//ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Ôªï¿½ï¿½
 				for(Integer id:addPicLayer.keySet()){
 					for(Drawable d:addPicLayer.get(id)){
-						//Èç¹ûÒªÌí¼ÓµÄÔªËØËù´¦Í¼²ã²»´æÔÚ£¬Ôò´´½¨Õâ¸öÍ¼²ã£¬²¢¸üÐÂÍ¼²ãIDÊý×é
+						//ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Óµï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ã²»ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò´´½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½
 						if(this.picLayer.get(id)==null){
 							this.picLayer.put(id, new ArrayList<Drawable>());
 							updateLayerIds(id);
@@ -86,13 +86,13 @@ public class MainSurface extends JPanel{
 					}
 				}
 				addPicLayer.clear();
-				//É¾³ýÍ¼²ãÖÐµÄÔªËØ
+				//É¾ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ðµï¿½Ôªï¿½ï¿½
 				for(Integer id:removePicLayer.keySet()){
 					for(Drawable d:removePicLayer.get(id)){
 						try {
 							this.picLayer.get(id).remove(d);
 						} catch (Exception e) {
-							System.out.println("Í¼²ãÄÚÈÝ²»´æÔÚ:"+id);
+							System.out.println("Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½:"+id);
 						}
 						
 					}
@@ -102,10 +102,10 @@ public class MainSurface extends JPanel{
 			}
 			break;
 		/**
-		 * ÎÞÂÛÊÇÏò»æÍ¼Í¼²ãÖÐÌí¼Ó»¹ÊÇÉ¾³ýÔªËØ£¬¶¼²»ÊÇÖ±½Ó²Ù×÷»æÖÆÍ¼²ã£¬¶¼ÊÇ´æ·ÅÔÚ¶ÔÓ¦µÄÁÙÊ±Í¼²ãÖÐ£¬µÈ´ý»æÖÆ·½·¨»æÖÆÖÜÆÚÖÐ½«±ä»¯µÄÄÚÈÝ¸üÐÂµ½»æÖÆÍ¼²ãÖÐ
-		 * ±£Ö¤¶àÏß³Ì²Ù×÷Çé¿öÏÂµÄ°²È«ÐÔ
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½É¾ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ã£¬ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½Ú¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ê±Í¼ï¿½ï¿½ï¿½Ð£ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+		 * ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ß³Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ°ï¿½È«ï¿½ï¿½
 		 */
-		//Ìí¼ÓÒ»¸öÔªËØ
+		//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½ï¿½
 		case CHANGE_MODE_ADD:
 			ArrayList<Drawable> al = addPicLayer.get(layerId);
 			if(al==null){
@@ -115,7 +115,7 @@ public class MainSurface extends JPanel{
 			al.add(draw);
 			changeLayer = true;	
 			break;
-		//É¾³ýÒ»¸öÔªËØ
+		//É¾ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½ï¿½
 		case CHANGE_MODE_REMOVE:
 			ArrayList<Drawable> al1 = removePicLayer.get(layerId);
 			if(al1==null){
@@ -130,50 +130,50 @@ public class MainSurface extends JPanel{
 	}
 	
 	/**
-	 * ½«Ò»¸ö¿É»æÖÆµÄÍ¼·ÅÈëÍ¼²ãÖÐ
+	 * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½É»ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param layer
-	 *            Í¼²ãºÅ Í¼²ãºÅËäÈ»ÊÇint£¬µ«ÊÇÊµ¼ÊÉÏÖ»Ö§³Öµ½byte£¬Ô­ÒòÊÇÍ¼²ãÃ»ÓÐ±ØÒªÄÇÃ´¶à
+	 *            Í¼ï¿½ï¿½ï¿½ Í¼ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½intï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ö»Ö§ï¿½Öµï¿½byteï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ã»ï¿½Ð±ï¿½Òªï¿½ï¿½Ã´ï¿½ï¿½
 	 * @param pic
-	 *            ¿É»æÖÆµÄÍ¼
+	 *            ï¿½É»ï¿½ï¿½Æµï¿½Í¼
 	 */
 	public void putDrawablePic(int layer, Drawable pic) {
 		if(pic==null){
-			System.out.println("Í¼²ãÄÚÈÝ²»ÄÜÎª¿Õ:¶ÔÓ¦Í¼²ã:"+layer);
+			System.out.println("Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½Îªï¿½ï¿½:ï¿½ï¿½Ó¦Í¼ï¿½ï¿½:"+layer);
 			return;
 		}
 		updatePicLayer(CHANGE_MODE_ADD,layer,pic);
 	}
 
 	/**
-	 * ½«Ò»¸ö¿É»æÖÆµÄÍ¼´ÓÍ¼²ãÖÐÒÆ³ý
+	 * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½É»ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½
 	 * 
 	 * @param layer
 	 * @param pic
 	 */
 	public void removeDrawablePic(int layer, Drawable pic) {
 		if(pic==null){
-			System.out.println("Í¼²ãÄÚÈÝ²»ÄÜÎª¿Õ:¶ÔÓ¦Í¼²ã:"+layer);
+			System.out.println("Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½Îªï¿½ï¿½:ï¿½ï¿½Ó¦Í¼ï¿½ï¿½:"+layer);
 			return;
 		}
 		updatePicLayer(CHANGE_MODE_REMOVE,layer,pic);
 	}
 
 	/**
-	 * ¸üÐÂÍ¼²ãId
+	 * ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Id
 	 * 
 	 * @param newLayerId
 	 */
 	private void updateLayerIds(int newLayerId) {
-		// ³õÊ¼»¯Í¼²ã
+		// ï¿½ï¿½Ê¼ï¿½ï¿½Í¼ï¿½ï¿½
 		if (picLayerId.length == 0) {
 			picLayerId = new int[1];
-			picLayerId[0] = newLayerId; // ½«ÐÂµÄÍ¼²ãIDÌí¼Óµ½³õÊ¼»¯µÄÍ¼²ãIDÊý×éÖÐ
+			picLayerId[0] = newLayerId; // ï¿½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		} else {
-			// ´´½¨Ò»¸öÐÂµÄÍ¼²ãÊý×é£¬³¤¶È±ÈÔ­À´µÄ´ó1Î»
+			// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½È±ï¿½Ô­ï¿½ï¿½ï¿½Ä´ï¿½1Î»
 			int picLayerIdFlag[] = new int[picLayerId.length + 1];
 			for (int i = 0; i < picLayerId.length; i++) {
-				// ÅÅÐò²Ù×÷£¬Èç¹ûÐÂµÄÍ¼²ãIDÐ¡ÓÚµ±Ç°Í¼²ãID£¬½²ÐÂµÄÍ¼²ãID²åÈëÆäÖÐ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½IDÐ¡ï¿½Úµï¿½Ç°Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (picLayerId[i] > newLayerId) {
 					for (int f = picLayerIdFlag.length - 1; f > i; f--) {
 						picLayerIdFlag[f] = picLayerId[f - 1];
@@ -183,16 +183,16 @@ public class MainSurface extends JPanel{
 				} else {
 					picLayerIdFlag[i] = picLayerId[i];
 				}
-				// Èç¹ûµ½ÁË×îºó£¬¶¼Ã»ÓÐ±ÈÐÂÍ¼²ãID´óµÄ£¬¾Í½«ÐÂµÄÍ¼²ãID´æÈë×îºó
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬¶ï¿½Ã»ï¿½Ð±ï¿½ï¿½ï¿½Í¼ï¿½ï¿½IDï¿½ï¿½Ä£ï¿½ï¿½Í½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (i == picLayerId.length - 1) {
 					picLayerIdFlag[picLayerIdFlag.length - 1] = newLayerId;
 				}
 			}
-			// ½«ÐÂµÄÍ¼²ãIDÊý×é¸²¸ÇÔ­ÓÐµÄ
+			// ï¿½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½IDï¿½ï¿½ï¿½é¸²ï¿½ï¿½Ô­ï¿½Ðµï¿½
 			this.picLayerId = picLayerIdFlag;
 		}
 	}
-	//»­°å
+	//ï¿½ï¿½ï¿½ï¿½
 	private JCanvas canvas = new JCanvas();
 	@Override
 	public synchronized void paint(Graphics g) {
@@ -209,13 +209,13 @@ public class MainSurface extends JPanel{
 	}
 	
 	/**
-	 * »­°åÀà
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @author Xiloer
 	 *
 	 */
 	private class JCanvas implements Canvas{		
 		/*
-		 * »æÖÆ»­°å
+		 * ï¿½ï¿½ï¿½Æ»ï¿½ï¿½ï¿½
 		 */
 		private BufferedImage canvas = new BufferedImage(GamingInfo.getGamingInfo().getScreenWidth(), GamingInfo.getGamingInfo().getScreenHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		private JPaint paint = new JPaint(canvas);
@@ -231,11 +231,23 @@ public class MainSurface extends JPanel{
 
 
 		@Override
-		public void drawBitmap(Bitmap bitmap, Matrix matrix, Paint paint) {	
+		public void drawBitmap(Bitmap bitmap, Matrix matrix, Paint paint) {
+			if (bitmap == null) {
+				System.out.println("drawBitmapÊ§ï¿½ï¿½: bitmapÎªnull");
+				return;
+			}
+			if (matrix == null) {
+				System.out.println("drawBitmapÊ§ï¿½ï¿½: matrixÎªnull");
+				return;
+			}
 			this.paint.getGraphics().drawImage(bitmap.getImage(),((JMatrix)matrix).trans, null);
 		}
 		@Override
 		public void drawBitmap(Bitmap bitmap, float x, float y, Paint paint) {
+			if (bitmap == null) {
+				System.out.println("drawBitmapÊ§ï¿½ï¿½: bitmapÎªnull");
+				return;
+			}
 			this.paint.getGraphics().drawImage(bitmap.getImage(),(int)x,(int)y, null);			
 		}	
 		
@@ -311,7 +323,7 @@ public class MainSurface extends JPanel{
 	
 	public class OnDrawThread extends Thread{
 		private MainSurface surface;
-		private int drawSpeed;//Ã¿´Î»æÖÆºóµÄÐÝÏ¢ºÁÃëÊý£¬Õâ¸öÖµÊÇ¸ù¾Ý³£Á¿ÖÐµÄ»æÖÆÖ¡Êý¾ö¶¨µÄ
+		private int drawSpeed;//Ã¿ï¿½Î»ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Ç¸ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ÐµÄ»ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public OnDrawThread(MainSurface surface){
 			super();
 			this.surface = surface;
