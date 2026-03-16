@@ -7,7 +7,7 @@ import com.mypro.tools.LogTools;
 
 
 /**
- * ÓÎÏ·³õÊ¼»¯¹ÜÀíÆ÷
+ * ï¿½ï¿½Ï·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author Leslie Leung
  *
  */
@@ -15,7 +15,7 @@ public class GameInitManager {
 	private static GameInitManager manager;
 	private boolean initing = true;
 	/**
-	 * ÊÇ·ñÕıÔÚ³õÊ¼»¯
+	 * ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú³ï¿½Ê¼ï¿½ï¿½
 	 * @return
 	 */
 	public boolean isIniting(){
@@ -31,7 +31,7 @@ public class GameInitManager {
 	public void init(){
 		ImageManager.getImageMnagaer().initManager();
 
-		initGame();//³õÊ¼»¯ÓÎÏ·
+		initGame();//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï·
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
@@ -43,54 +43,45 @@ public class GameInitManager {
 		initing = false;
 	}
 	/**
-	 * ³õÊ¼»¯ËùÓĞ×é¼ş
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void initComponents(){
 		LayoutManager.getLayoutManager().init();
 	}
 
 	/**
-	 * ³õÊ¼»¯ÓÎÏ·
+	 * åˆå§‹åŒ–æ¸¸æˆ
 	 */
 	private void initGame(){
-		//³õÊ¼»¯½çÃæ×é¼ş
-		this.initComponents();
-		//³õÊ¼»¯µÃ·Ö¹ÜÀíÆ÷
-		ScoreManager.getScoreManager().init();
-
-		//³õÊ¼»¯´óÅÚ¹ÜÀíÆ÷
-		CannonManager.getCannonManager().init();
-
-		//³õÊ¼»¯Óã¹ÜÀíÆ÷
-		FishManager.getFishMananger().initFish();
-
-		//³õÊ¼»¯ÓãÈº¹ÜÀíÆ÷
-		GamingInfo.getGamingInfo().setShoalManager(new ShoalManager());
-
-		//³õÊ¼»¯¹Ø¿¨¹ÜÀíÆ÷
-		GamePartManager.getManager().prepare();
-
-		//³õÊ¼»¯´óÅÚ
-		CannonManager.getCannonManager().initCannon();
-
+		try {
+			this.initComponents();
+			ScoreManager.getScoreManager().init();
+			CannonManager.getCannonManager().init();
+			FishManager.getFishMananger().initFish();
+			GamingInfo.getGamingInfo().setShoalManager(new ShoalManager());
+			GamePartManager.getManager().prepare();
+			CannonManager.getCannonManager().initCannon();
+		} catch (Exception e) {
+			LogTools.doLogForException(e);
+		}
 	}
 
 	/**
-	 * Í£Ö¹ÓÎÏ·
+	 * Í£Ö¹ï¿½ï¿½Ï·
 	 */
 	public void stop(){
 
 		try {
-			//ÉèÖÃÓÎÏ·½áÊø
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 			GamingInfo.getGamingInfo().setGaming(false);
 			Thread.sleep(1000);
 
-			//×¢ÏúÓã¹ÜÀíÆ÷
+			//×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			FishManager.destroy();
-			//×¢ÏúÓÎÏ·¹Ø¿¨¹ÜÀíÆ÷
+			//×¢ï¿½ï¿½ï¿½ï¿½Ï·ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			GamePartManager.getManager().destroy();
 
-			//×¢Ïú×Ô¼º
+			//×¢ï¿½ï¿½ï¿½Ô¼ï¿½
 			manager = null;
 		} catch (Exception e) {
 			LogTools.doLogForException(e);
@@ -98,10 +89,10 @@ public class GameInitManager {
 	}
 
 	/**
-	 * ¿ªÊ¼ÓÎÏ·
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½Ï·
 	 */
 	private void beginGame(){
-		//¿ªÊ¼
+		//ï¿½ï¿½Ê¼
 		GamePartManager.getManager().start();
 	}
 

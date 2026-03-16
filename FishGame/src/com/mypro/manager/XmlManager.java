@@ -6,27 +6,20 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 /**
- * Xml¹ÜÀíÆ÷
+ * Xmlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author Leslie Leung
  *
  */
 public class XmlManager {
 	/**
-	 * »ñÈ¡XML½âÎöÆ÷
-	 * @param fileName	ÐèÒª½âÎöµÄxmlÎÄ¼þÂ·¾¶¼ÓÎÄ¼þÃû£¨²»º¬ºó×º£¬ÕâÀïºó×ºÍ³Ò»ÓÃplist,ÓÐ±ØÒªÔÚÐÞ¸Ä£©
-	 * @param encode	×Ö·û¼¯±àÂë
+	 * ï¿½ï¿½È¡XMLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param fileName	ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xmlï¿½Ä¼ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ºÍ³Ò»ï¿½ï¿½plist,ï¿½Ð±ï¿½Òªï¿½ï¿½ï¿½Þ¸Ä£ï¿½
+	 * @param encode	ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public static XmlPullParser getXmlParser(String fileName,String encode){
 		try{
-			// »ñµÃ´¦Àí xml ÎÄ¼þµÄ XmlResourceParser ¶ÔÏó
-//			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-			XmlPullParserFactory factory = XmlPullParserFactory.newInstance(
-					 
-                    System.getProperty(XmlPullParserFactory.PROPERTY_NAME), 
-
-           Thread.currentThread().getContextClassLoader().getClass() );
-
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 			factory.setNamespaceAware(true);
 			XmlPullParser xml = factory.newPullParser();
 			xml.setInput(new FileInputStream(fileName + ".plist"), encode);
@@ -38,7 +31,7 @@ public class XmlManager {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°±êÇ©µÄÖµ
+	 * ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ç©ï¿½ï¿½Öµ
 	 * 
 	 * @return
 	 */
@@ -46,13 +39,13 @@ public class XmlManager {
 		try {
 			int eventType = xml.next();
 			while (true) {
-				// ¶ÁÈ¡±êÇ©ÄÚÈÝ×´Ì¬
+				// ï¿½ï¿½È¡ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½×´Ì¬
 				if (eventType == XmlPullParser.TEXT) {
 					return xml.getText().trim();
 				}
-				// ÎÄµµ½áÊø×´Ì¬
+				// ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 				else if (eventType == XmlPullParser.END_DOCUMENT) {
-					// ÎÄµµ·ÖÎö½áÊøºó£¬ÍË³ö while Ñ­»·
+					// ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ while Ñ­ï¿½ï¿½
 					break;
 				}
 				eventType = xml.next();
@@ -64,28 +57,28 @@ public class XmlManager {
 	}
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨Ãû³ÆµÄ±êÇ©
+	 * ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ÆµÄ±ï¿½Ç©
 	 * 
-	 * @return	true:µ½´ïÕâ¸ö±êÇ©  falseÃ»ÓÐÕâ¸ö±êÇ©
+	 * @return	true:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©  falseÃ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
 	 */
 	public static boolean gotoTagByTagName(XmlPullParser xml, String tagName) {
 		try {
 			int eventType = xml.next();
 			String key = null;
 			while (true) {
-				// ±êÇ©¿ªÊ¼×´Ì¬
+				// ï¿½ï¿½Ç©ï¿½ï¿½Ê¼×´Ì¬
 				if (eventType == XmlPullParser.START_TAG) {
 					key = xml.getName();
 					if (key.trim().equals(tagName)) {
 						return true;
 					}
 				}
-				// ÎÄµµ½áÊø×´Ì¬
+				// ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 				else if (eventType == XmlPullParser.END_DOCUMENT) {
-					// ÎÄµµ·ÖÎö½áÊøºó£¬ÍË³ö while Ñ­»·
+					// ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ while Ñ­ï¿½ï¿½
 					return false;
 				}
-				// ÇÐ»»µ½ÏÂÒ»¸ö×´Ì¬£¬²¢»ñµÃµ±Ç°×´Ì¬µÄÀàÐÍ
+				// ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				eventType = xml.next();
 
 			}
